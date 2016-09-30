@@ -17,6 +17,6 @@ public class HunterMed implements Topic {
 		if(JonathanMain.findKeyword(userInput, "medical", 0) >= 0){
 			return true;
 		}
-		return false;
+		return false
 	}
 }
