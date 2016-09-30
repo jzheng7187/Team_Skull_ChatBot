@@ -8,6 +8,9 @@ public class JonathanMain {
 	static boolean inLoop;
 	static String response;
 	static Topic school;
+	static Topic relations;
+	static Topic medical;
+	static Topic psychological;
 	
 	public static void main(String[] args) {
 		createTopic();

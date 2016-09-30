@@ -3,7 +3,8 @@ package groupFiles;
 public class JonathanPsychological implements Topic {
 
 	private boolean inQuestionLoop;
-	private String qestionResponse;
+	private String qestionRespone;
+	//food
 		
 	public void talk() {
 		
