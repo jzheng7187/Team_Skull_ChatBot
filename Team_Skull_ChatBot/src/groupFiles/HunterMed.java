@@ -9,7 +9,7 @@ public class HunterMed implements Topic {
 		JonathanMain.print("What is your medical problem?");
 		inMedLoop = true;
 		while(inMedLoop){
-			medResponse = JonathanMain.getInput();
+			JonathanMain.print("Greetings " +JonathanMain.users+", what is your age?");
 		}
 	}
 	
