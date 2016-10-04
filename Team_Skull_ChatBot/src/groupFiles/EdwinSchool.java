@@ -3,13 +3,23 @@ package groupFiles;
 public class EdwinSchool implements Topic {
 	private boolean inSchoolLoop;
 	private String schoolResponse;
+	
+	private int chatCount;
+	private double GPA;
+	
 	private String []answers = {"I understand that your problems are school related. But I first need some information "
 			+ "regarding your academics "+ JonathanMain.users +". What is your current GPA? "};
 	public void talk() {
 		inSchoolLoop = true;
 		while(inSchoolLoop){
-
-			
+			schoolResponse = JonathanMain.getInput();
+			if(JonathanMain.findKeyword(schoolResponse,"GPA",0) >= 0){
+				
+			}
+			else if(!isTriggered(schoolResponse)){
+				inSchoolLoop = false;
+				JonathanMain.talkForever();
+			}
 		}
 	}
 
