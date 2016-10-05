@@ -32,8 +32,21 @@ public class JonathanMain {
 		while(inLoop){
 			print("Greetings, " + users +". How are you?");
 			response = getInput();
-			if(findKeyword(response, "good", 0) >= 0){
-				print("I'm so happy you're good.");
+			if(school.isTriggered(response)){
+				inLoop = false;
+				school.talk();
+			}
+			else if(medical.isTriggered(response)){
+				inLoop = false;
+				medical.talk();
+			}
+			else if(relations.isTriggered(response)){
+				inLoop = false;
+				relations.talk();
+			}
+			else if(psychological.isTriggered(response)){
+				inLoop = false;
+				psychological.talk();
 			}
 			else{
 				print("I'm sorry. I don't understand you.");
@@ -114,6 +127,9 @@ public class JonathanMain {
 	public static void createTopic() {
 		input = new Scanner(System.in);
 		school = new EdwinSchool();
+		relations = new AlexInterRel();
+		psychological = new JonathanPsychological();
+		medical = new HunterMed();
 		
 	}
 	
