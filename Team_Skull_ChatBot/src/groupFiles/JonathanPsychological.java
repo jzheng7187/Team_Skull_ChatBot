@@ -8,38 +8,30 @@ public class JonathanPsychological implements Topic {
 		
 	public void talk() 
 	{
-		JonathanMain.print("I see you have a psychological problem.");
+		JonathanMain.print("I see you have a psychological problem. Can you specify what"
+				+ " kind of pychological problem?"
+				+ "Depression?Anxiety?Schizophrenia?");
 		inQuestionLoop = true;
-		while(inQuestionLoop)
-		{
+		while(inQuestionLoop){
 			questionResponse = JonathanMain.getInput();
-			int psychPsn = JonathanMain.findKeyword(questionResponse, "pyschological", 0);
-			if(psychPsn >= 0)
-			{
-				String psychProblem = questionResponse.substring(psychPsn + 14);
-				JonathanMain.print("I see that you have a " + psychProblem + "problem.");
-				if(JonathanMain.findKeyword(questionResponse, "medical", 0)>= 0){
-					inQuestionLoop = false;
-					JonathanMain.talkForever();
-				}else if(JonathanMain.findKeyword(questionResponse, "inter-Relationship", 0) >= 0){
-					 inQuestionLoop = false;
-					 JonathanMain.talkForever();
-				}else if(JonathanMain.findKeyword(questionResponse, "school", 0) >= 0){
-					 inQuestionLoop = false;
-					 JonathanMain.talkForever();
-				}else{
-					inQuestionLoop = false;
-					JonathanMain.talkForever();
-				}
+			JonathanMain.print("I see that you have a " + questionResponse + "problem.");
+			if(JonathanMain.findKeyword(questionResponse, "depression", 0) >= 0){
+
+			}
+			else if(JonathanMain.findKeyword(questionResponse, "anxiety", 0) >= 0){
+
+			}
+			else if(JonathanMain.findKeyword(questionResponse, "schizophrenia", 0) >= 0){
+				
+			}
+			else{
+				JonathanMain.print("I don't understand what kind of psychological problem you have.");
 			}
 		}
 	}
 
 	public boolean isTriggered(String userInput) {
-		if(JonathanMain.findKeyword(userInput, "depression" , 0) >= 0){
-			return true;
-		}
-		if(JonathanMain.findKeyword(userInput, "anxiety", 0) >= 0){
+		if(JonathanMain.findKeyword(userInput, "psychological" , 0) >= 0){
 			return true;
 		}
 		return false;
