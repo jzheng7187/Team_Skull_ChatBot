@@ -30,7 +30,7 @@ public class JonathanMain {
 	public static void talkForever(){
 		inLoop = true;
 		while(inLoop){
-			print("Greetings, " + users +". How are you?");
+			print("Greetings, " + users +".  What kind of problem do you  have? Is medical, psychological,school or inter-relationships?");
 			response = getInput();
 			if(school.isTriggered(response)){
 				inLoop = false;
