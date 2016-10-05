@@ -8,13 +8,12 @@ public class JonathanPsychological implements Topic {
 		
 	public void talk() 
 	{
-		JonathanMain.print("I see you have a psychological problem. Can you specify what"
-				+ " kind of pychological problem?"
-				+ "Depression?Anxiety?Schizophrenia?");
 		inQuestionLoop = true;
 		while(inQuestionLoop){
+			JonathanMain.print("I see you have a psychological problem. Can you specify what"
+					+ " kind of pychological problem?"
+					+ "Depression?Anxiety?Schizophrenia?");
 			questionResponse = JonathanMain.getInput();
-			JonathanMain.print("I see that you have a " + questionResponse + "problem.");
 			if(JonathanMain.findKeyword(questionResponse, "depression", 0) >= 0){
 
 			}
