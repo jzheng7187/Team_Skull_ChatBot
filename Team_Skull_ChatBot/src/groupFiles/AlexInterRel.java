@@ -43,7 +43,7 @@ public class AlexInterRel implements Topic {
 		//	if(!isTriggered(problemResponse)){
 			//	inQuestionLoop = false;
 				
-			
+			sda
 		}
 	}
 	
