@@ -53,7 +53,7 @@ public class HunterMed implements Topic {
 	}
 
 	private static String getMedicine(){
-		return medicine;
+		return "medicine";
 	}
 
 	public boolean isTriggered(String userInput){
