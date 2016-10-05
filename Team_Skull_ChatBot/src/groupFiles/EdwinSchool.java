@@ -3,7 +3,7 @@ package groupFiles;
 public class EdwinSchool implements Topic {
 	private boolean inSchoolLoop;
 	private String schoolResponse;
-	private String name = JonathanMain.users;
+	static String name;
 	
 	private int chatCount;
 	private double GPA;
@@ -12,10 +12,11 @@ public class EdwinSchool implements Topic {
 	
 	public void talk() {
 		inSchoolLoop = true;
+		name = JonathanMain.users;
 		while(inSchoolLoop){
 			chatCount++;
 			if (chatCount == 1){
-				JonathanMain.print("School-related problems are quite broad,"+name+" . Can you specify what your problem is?");
+				JonathanMain.print("School-related problems are quite broad, "+name+". Can you specify what your problem is?");
 				schoolResponse = JonathanMain.getInput();
 				identifyProblem(schoolResponse);
 			}
@@ -39,12 +40,19 @@ public class EdwinSchool implements Topic {
 		
 
 	private void homeworkProblem() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	private void gradesProblem() {
 		JonathanMain.print("What is your current GPA?");
+		schoolResponse = JonathanMain.getInput();
+		while(!isaGPAResponse(schoolResponse)){
+			JonathanMain.print("That is not a GPA response. Please type a proper GPA, using the CollegeBoard guidelines.");
+			schoolResponse = JonathanMain.getInput();
+		}
+		JonathanMain.print(GPA + " is a very high GPA!");
+		
 		
 	}
 
@@ -58,10 +66,23 @@ public class EdwinSchool implements Topic {
 		return false;
 	}
 	private boolean isaGPAResponse(String userInput){
-		double GPA = Double.parseDouble(userInput); 
-		if(GPA >= 5.0 || GPA<= 0.0){
+		if (isDouble(userInput)){
+			GPA = Double.parseDouble(userInput); 
+			if(GPA >= 5.0 || GPA<= 0.0){
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	private boolean isDouble(String userInput) {
+		try{
+			Double.parseDouble(userInput);
+			return true;
+		}
+		catch(NumberFormatException e){
 			return false;
 		}
-		return true;
 	}
 }
