@@ -34,6 +34,18 @@ public class JonathanPsychological implements Topic {
 
 	private void depressionProblems() {
 		JonathanMain.print("The main way to solve depression is to talk about it with other people.");
+		String[] tries = {"tried","will try"};
+		for(int i = 0; i < tries.length; i++){
+			if(JonathanMain.findKeyword(questionResponse, tries[i], 0) >= 0){
+				if(JonathanMain.findKeyword(questionResponse, tries[2], 0) >= 0){
+					JonathanMain.print("Okay. Hopefully that will help you get out of your depression.");
+				}
+				JonathanMain.print("There are many other solutions that can help solve depression. Some "
+						+ "other solutions could be to do some exercise, challenge negative thinking and "
+						+ "eating a healthy diet.");
+			}
+		}
+		
 		
 	}
 
