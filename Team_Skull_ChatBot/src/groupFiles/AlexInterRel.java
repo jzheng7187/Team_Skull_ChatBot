@@ -52,7 +52,7 @@ public class AlexInterRel implements Topic {
 	        public static void talkProblem(){
    			
 	        
-	        	System.out.println("Who is causing this distress?");
+	        	System.out.println("Who is causing this distress? Give me their first name.");
 	        	who = JonathanMain.input.nextLine();
 	        	
 	        	
