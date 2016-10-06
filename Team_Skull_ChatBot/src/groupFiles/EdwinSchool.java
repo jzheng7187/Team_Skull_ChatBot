@@ -7,6 +7,7 @@ public class EdwinSchool implements Topic {
 	private int chatCount;
 	private double GPA;
 	private int askedGrades;
+	private int askedCollege;
 
 
 	public void talk() {
@@ -19,7 +20,7 @@ public class EdwinSchool implements Topic {
 			}
 			else if (chatCount > 1){
 				JonathanMain.print("Are there any other school related problems to be adressed " +name+"?");
-					}
+			}
 			String []negative = {"no","not","none","nothing","nah"};//negative responses
 			schoolResponse = JonathanMain.getInput();
 			for (int i = 0;i < negative.length;i++ ){
@@ -45,32 +46,49 @@ public class EdwinSchool implements Topic {
 	}
 
 	private void identifyProblem(String userInput) {
-			if (JonathanMain.findKeyword(userInput, "grade", 0) >= 0 || 
-					JonathanMain.findKeyword(userInput, "gpa", 0) >= 0 ||
-					JonathanMain.findKeyword(userInput, "grades", 0) >= 0){
-				askedGrades ++;
-				if(askedGrades > 1){
-					JonathanMain.print("You already asked me about that.");
-					return;
-				}
-				gradesProblem();
+		if (JonathanMain.findKeyword(userInput, "grade", 0) >= 0 || 
+				JonathanMain.findKeyword(userInput, "gpa", 0) >= 0 ||
+				JonathanMain.findKeyword(userInput, "grades", 0) >= 0){
+			askedGrades ++;
+			if(askedGrades > 1){
+				JonathanMain.print("You already asked me about that.");
+				return;
 			}
-			else if (JonathanMain.findKeyword(userInput, "college", 0) >= 0){
-				collegeProblem();
-			}
+			gradesProblem();
 		}
+		else if (JonathanMain.findKeyword(userInput, "college", 0) >= 0){
+			askedGrades ++;
+			if(askedCollege > 1){
+				JonathanMain.print("You already asked me about that.");
+				return;
+			}	
+			collegeProblem();
+		}
+	}
 
 	private void collegeProblem() {
 		JonathanMain.print("What college are you aiming for?");
 		String []ivyLeague = {"columbia","cornell","stanford","harvard","brown","yale","princeton","upenn"};
-		String []otherColleges = {"cuny","suny","mit"};
-		
-		JonathanMain.print("What college are you going to?");
-			
-			if (GPA > 0){
-				
-			}
+		String []otherColleges = {"cuny","suny","mit","uc"};
+		String []stressRelief = {" getting a massage", " playing OverWatch "," go play some ball "};
 
+		JonathanMain.print("What college are you planning on going to?");
+		schoolResponse = JonathanMain.getInput();
+		for (int i = 0; i < ivyLeague.length;i++){
+			if ((JonathanMain.findKeyword(schoolResponse, ivyLeague[i], 0)>= 0)){
+				JonathanMain.print("Wow! Trying to get in an Ivy League must have alot of stress on you. I would suggest"
+						+ stressRelief[(int)Math.random()*stressRelief.length] +"to relax.");
+				return;
+			}
+			for (int j = 0; j < otherColleges.length;j++){
+				if((JonathanMain.findKeyword(schoolResponse, ivyLeague[j], 0)>= 0)){
+					JonathanMain.print(otherColleges[j] +" requires a high GPA. If you are struggling with to keep a high GPA"
+							+ " don't hesitate to ask for my advice!");
+					return;
+				}
+			}
+			JonathanMain.print("I haven't heard of that college. It must be some amazing super-school!");
+		}
 	}
 
 	private void gradesProblem() {
@@ -93,8 +111,8 @@ public class EdwinSchool implements Topic {
 	}
 
 	private void findAPForHelp() {
-		String []courses = {"algebra","geometry","trigonometry","calculus","apliterature","americanliterature","englishliterature",
-				"worldliterature","biology","chemistry","physics","worldhistory","us history","europeanhistory","economics"};
+		String []courses = {"algebra","geometry","trigonometry","calculus","ap literature","american literature","english literature",
+				"world literature","biology","chemistry","physics","world history","us history","european history","economics"};
 		//using the array of courses, code attempts to provide an AP for help
 		JonathanMain.print("Hmm. This looks like a serious problem. Which specific class do you need help with?");
 		schoolResponse = JonathanMain.getInput();
@@ -151,5 +169,4 @@ public class EdwinSchool implements Topic {
 			return false;
 		}
 	}
-//penis
 }
