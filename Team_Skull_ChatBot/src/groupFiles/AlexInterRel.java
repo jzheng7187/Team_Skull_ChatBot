@@ -1,18 +1,20 @@
 package groupFiles;
-
+//Alex Huang
 import java.util.Scanner;
 
 import chatbot.JonathanMain;
-import chatbot.Main;
+
 
 public class AlexInterRel implements Topic {
 	private boolean inQuestionLoop ;
 	static Scanner input;
 	static boolean whereLoop; 
 	static String response1;
+	static String response2;
 	private String problemResponse;
+	static boolean whoLoop;
 	static String who;
-	
+	static String whoResponse;
 
 	private int problemCount;
 	
@@ -43,31 +45,43 @@ public class AlexInterRel implements Topic {
 		//	if(!isTriggered(problemResponse)){
 			//	inQuestionLoop = false;
 				
-			sda
+			
 		}
 	}
 	
-	        static void talkProblem(){
+	        public static void talkProblem(){
    			
+	        
+	        	System.out.println("Who is causing this distress? Give me their first name.");
+	        	who = JonathanMain.input.nextLine();
+	        	
+	        	
+	        	whoLoop = true;
+	        	while(whoLoop){
+	        		System.out.println("Has "+who+" hurt you physically?" );
+	        		response2 = JonathanMain.getInput();
+	        		if(JonathanMain.findKeyword(response2, "yes", 0)>=0){
+	        			JonathanMain.print("Don't worry, I will call the police for you.");
+	        		}
+	        		if(JonathanMain.findKeyword(response2, "no", 0)>=0){
+	        			JonathanMain.print("Do you want me to talk to both of youy to solve your problem?");
+	        		}
+	        		
+	        			else{
+	        			JonathanMain.print("It's a yes or a no question.");
+	        		}
+	        			
+	        		
+	        	}
+	        	
+	        	
 			
-			System.out.println("Who is causing this distress?");
-		   
-			String who = input.nextLine();
-		    
-			System.out.println("Has "+who+" hurt you physically?" );
-			response1 = input.nextLine();
-			if(JonathanMain.findKeyword(response1,"yes",0) >= 0){
-				System.out.println("Where did "+who+" hurt you?");
-			}
-			else{
-				System.out.println("What did "+who+" say that hurt you?");
-				
-			}
 			
+		
 			
 	}
-	
-private void printResponse() {
+	        
+	        private void printResponse() {
 		int responseChoice = 0;
 		if(problemCount > 3 ){
 			responseChoice = (int)(Math.random()*questions.length);
@@ -99,7 +113,3 @@ public boolean isTriggered(String userInput) {
 }
 
 }
-
-
-
-
