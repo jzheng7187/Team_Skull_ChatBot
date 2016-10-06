@@ -6,42 +6,36 @@ public class EdwinSchool implements Topic {
 	static String name;
 	private int chatCount;
 	private double GPA;
+	private int askedGrades;
 
-	//private static String []topics = {"grades","college","homework","GPA"};
 
 	public void talk() {
 		inSchoolLoop = true;
 		name = JonathanMain.users;
 		while(inSchoolLoop){
 			chatCount++;
-
 			if (chatCount == 1){
 				JonathanMain.print("School-related problems are quite broad, "+name+". Can you specify what your problem is?");
-				schoolResponse = JonathanMain.getInput();
-				identifyProblem(schoolResponse);
 			}
 			else if (chatCount > 1){
 				JonathanMain.print("Are there any other school related problems to be adressed " +name+"?");
-				String []negative = {"no","not","none","nothing","nah"};//negative responses
-				schoolResponse = JonathanMain.getInput();
-
-				for (int i = 0;i < negative.length;i++ ){
-					if (JonathanMain.findKeyword(schoolResponse,negative[i],0) >= 0){
-						JonathanMain.print("Thanks for talking with the school branch! I will now kick you out of this"
-								+ " group chat and send you back to the main office.");
-						inSchoolLoop = false;
-						JonathanMain.talkForever();
 					}
+			String []negative = {"no","not","none","nothing","nah"};//negative responses
+			schoolResponse = JonathanMain.getInput();
+			for (int i = 0;i < negative.length;i++ ){
+				if (JonathanMain.findKeyword(schoolResponse,negative[i],0) >= 0){
+					JonathanMain.print("Thanks for talking with the school branch! I will now kick you out of this"
+							+ " group chat and send you back to the main office.");
+					inSchoolLoop = false;
+					JonathanMain.talkForever();	
 				}
-				schoolResponse = JonathanMain.getInput();
-				identifyProblem(schoolResponse);	
 			}
-
+			identifyProblem(schoolResponse);	
 		}
 	}
 
 	public boolean isTriggered(String userInput) {
-		String []triggers = {"school","academic","GPA"};
+		String []triggers = {"school","academic","GPA","college"};
 		for (int i = 0;i < triggers.length;i++ ){
 			if (JonathanMain.findKeyword(userInput,triggers[i],0) >= 0){
 				return true;
@@ -51,27 +45,31 @@ public class EdwinSchool implements Topic {
 	}
 
 	private void identifyProblem(String userInput) {
-		boolean schoolProblem = false;
-		while(!schoolProblem){
 			if (JonathanMain.findKeyword(userInput, "grade", 0) >= 0 || 
 					JonathanMain.findKeyword(userInput, "gpa", 0) >= 0 ||
 					JonathanMain.findKeyword(userInput, "grades", 0) >= 0){
-				schoolProblem = true;
+				askedGrades ++;
+				if(askedGrades > 1){
+					JonathanMain.print("You already asked me about that.");
+					return;
+				}
 				gradesProblem();
 			}
 			else if (JonathanMain.findKeyword(userInput, "college", 0) >= 0){
-				schoolProblem = true;
-				homeworkProblem();
-			}
-			else{
-				JonathanMain.print("That is not a school-related problem. Please tell me a school related problem.");
-				schoolResponse = JonathanMain.getInput();
+				collegeProblem();
 			}
 		}
-	}
 
-	private void homeworkProblem() {
-
+	private void collegeProblem() {
+		JonathanMain.print("What college are you aiming for?");
+		String []ivyLeague = {"columbia","cornell","stanford","harvard","brown","yale","princeton","upenn"};
+		String []otherColleges = {"cuny","suny","mit"};
+		
+		JonathanMain.print("What college are you going to?");
+			
+			if (GPA > 0){
+				
+			}
 
 	}
 
@@ -87,13 +85,12 @@ public class EdwinSchool implements Topic {
 			//creates a amount of time for studying based on current GPA
 			int i = (int)Math.floor(GPA);
 			i = (int)(100*(1-(GPA - i)));
-			JonathanMain.print("I reccomend you study for at least "+i+" more minutes a day to ensure you understand whats happending in class."); 	
+			JonathanMain.print("I reccomend you study for at least "+i+" more minutes a day to ensure you understand whats happening in class."); 	
 		}
 		else{
 			findAPForHelp();
 		}
 	}
-
 
 	private void findAPForHelp() {
 		String []courses = {"algebra","geometry","trigonometry","calculus","apliterature","americanliterature","englishliterature",
@@ -137,7 +134,7 @@ public class EdwinSchool implements Topic {
 	private boolean isaGPAResponse(String userInput){
 		if (isDouble(userInput)){
 			GPA = Double.parseDouble(userInput); 
-			if(GPA >= 4.0 || GPA<= 0.0){
+			if(GPA > 4.0 || GPA < 0.0){
 				return false;
 			}
 			return true;
