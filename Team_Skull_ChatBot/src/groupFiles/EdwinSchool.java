@@ -36,7 +36,7 @@ public class EdwinSchool implements Topic {
 	}
 
 	public boolean isTriggered(String userInput) {
-		String []triggers = {"school","academic","GPA","college"};
+		String []triggers = {"school","academic","GPA","college","colleges"};
 		for (int i = 0;i < triggers.length;i++ ){
 			if (JonathanMain.findKeyword(userInput,triggers[i],0) >= 0){
 				return true;
@@ -56,8 +56,10 @@ public class EdwinSchool implements Topic {
 			}
 			gradesProblem();
 		}
-		else if (JonathanMain.findKeyword(userInput, "college", 0) >= 0){
-			askedGrades ++;
+		else if (JonathanMain.findKeyword(userInput, "college", 0) >= 0
+				|| JonathanMain.findKeyword(userInput, "colleges", 0) >= 0
+				|| JonathanMain.findKeyword(userInput, "university", 0) >= 0){
+			askedCollege ++;
 			if(askedCollege > 1){
 				JonathanMain.print("You already asked me about that.");
 				return;
@@ -67,17 +69,16 @@ public class EdwinSchool implements Topic {
 	}
 
 	private void collegeProblem() {
-		JonathanMain.print("What college are you aiming for?");
 		String []ivyLeague = {"columbia","cornell","stanford","harvard","brown","yale","princeton","upenn"};
 		String []otherColleges = {"cuny","suny","mit","uc"};
 		String []stressRelief = {" getting a massage", " playing OverWatch "," go play some ball "};
-
-		JonathanMain.print("What college are you planning on going to?");
+		
+		JonathanMain.print("Which college are you aiming for?");
 		schoolResponse = JonathanMain.getInput();
 		for (int i = 0; i < ivyLeague.length;i++){
 			if ((JonathanMain.findKeyword(schoolResponse, ivyLeague[i], 0)>= 0)){
 				JonathanMain.print("Wow! Trying to get in an Ivy League must have alot of stress on you. I would suggest"
-						+ stressRelief[(int)Math.random()*stressRelief.length] +"to relax.");
+						+ stressRelief[(int)Math.random()*stressRelief.length] +" to relax.");
 				return;
 			}
 			for (int j = 0; j < otherColleges.length;j++){
