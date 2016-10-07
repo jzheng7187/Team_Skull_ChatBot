@@ -12,14 +12,14 @@ public class JonathanPsychological implements Topic {
 		inQuestionLoop = true;
 		while(inQuestionLoop){
 			questionResponse = JonathanMain.getInput();
-			String[] nothing = {"no","none","nothing"};
+			problemIdentifier();
+			String[] nothing = {"no","none","nothing","bye","goodbye"};
 			for(int i = 0; i < nothing.length; i++){
 				if(JonathanMain.findKeyword(questionResponse, nothing[i], 0) >= 0){
 					JonathanMain.print("Hopefully we have given you tips on how to solve your problem.");
 					inQuestionLoop = false;
 					JonathanMain.talkForever();
 				}
-				problemIdentifier();
 			}
 		}
 	}
