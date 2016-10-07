@@ -1,12 +1,10 @@
 package groupFiles;
 
-public class JonathanPsychological implements Topic{
+public class JonathanPsychological implements Topic {
 
 	private boolean inQuestionLoop;
 	private String questionResponse;
-	private boolean depressionLoop;
-	private boolean anxietyLoop;
-		
+		//food
 	public void talk(){
 		JonathanMain.print("Hello, "+ JonathanMain.users +" I see you have a psychological problem. Can you specify what"
 				+ " kind of pychological problem?"
@@ -14,15 +12,15 @@ public class JonathanPsychological implements Topic{
 		inQuestionLoop = true;
 		while(inQuestionLoop){
 			questionResponse = JonathanMain.getInput();
-			String[] nothing = {"no","none","nothing","bye","goodbye"};
+			String[] nothing = {"no","none","nothing"};
 			for(int i = 0; i < nothing.length; i++){
 				if(JonathanMain.findKeyword(questionResponse, nothing[i], 0) >= 0){
 					JonathanMain.print("Hopefully we have given you tips on how to solve your problem.");
 					inQuestionLoop = false;
 					JonathanMain.talkForever();
 				}
+				problemIdentifier();
 			}
-			problemIdentifier();
 		}
 	}
 
@@ -33,7 +31,7 @@ public class JonathanPsychological implements Topic{
 		if(JonathanMain.findKeyword(questionResponse, "anxiety", 0) >= 0){
 			anxietyProblems();
 		}
-		if(JonathanMain.findKeyword(questionResponse, "anxiety", 0) >= 0){
+		else if(JonathanMain.findKeyword(questionResponse, "anxiety", 0) >= 0){
 			schizophreniaProblems();
 		}	
 	}
@@ -51,19 +49,12 @@ public class JonathanPsychological implements Topic{
 					+ " With this detail being true, people have found many ways to treat this disorder.");
 			JonathanMain.print("Some ways to treat this disorder is a healthy diet, meditation, reducing "
 					+ "caffine intake, and stress management.");
-		anxietyLoop = true;
-		while(anxietyLoop){
-			if(JonathanMain.findKeyword(questionResponse, "stop", 0) >= 0){
-				anxietyLoop = false;
-				JonathanMain.talkForever();
+			if(JonathanMain.findKeyword(questionResponse, "tried", 0) >= 0){
+				JonathanMain.print("There is also the option of taking medication or going to therapy sessions."
+						+ " Some types of medications that can be taken are Sedatives, Antidepressents, and Anxiolytic");
 			}
-				if(JonathanMain.findKeyword(questionResponse, "tried", 0) >= 0){
-					JonathanMain.print("There is also the option of taking medication or going to therapy sessions."
-							+ " Some types of medications that can be taken are Sedatives, Antidepressents, and Anxiolytic");
-				}
-				if(JonathanMain.findKeyword(questionResponse, "will try", 0) >= 0){
-					JonathanMain.print("Hopefully these solutions can help you overcome your anxiety.");
-				}
+			else if(JonathanMain.findKeyword(questionResponse, "will try", 0) >= 0){
+				JonathanMain.print("Hopefully these solutions can help you overcome your anxiety.");
 			}
 		}
 	}
@@ -74,21 +65,17 @@ public class JonathanPsychological implements Topic{
 					+ "since people have started getting out of depression, there "
 					+ "are many ways to deal with depression.");
 			JonathanMain.print("The main way to solve depression is to talk about it with other people.");
-		}
-		depressionLoop = true;
-		while(depressionLoop){
-			if(JonathanMain.findKeyword(questionResponse, "stop", 0) >= 0){
-				depressionLoop = false;
-				JonathanMain.talkForever();
-			}
-				if(JonathanMain.findKeyword(questionResponse, "will try", 0) >= 0){
-					JonathanMain.print("Okay. Hopefully that will help you get out of your depression.");
-				}
-				if(JonathanMain.findKeyword(questionResponse, "tried", 0) >= 0){
+			String[] tries = {"tried","will try"};
+			for(int i = 0; i < tries.length; i++){
+				if(JonathanMain.findKeyword(questionResponse, tries[i], 0) >= 0){
+					if(JonathanMain.findKeyword(questionResponse, "will try", 0) >= 0){
+						JonathanMain.print("Okay. Hopefully that will help you get out of your depression.");
+					}
 					JonathanMain.print("There are many other solutions that can help solve depression. Some "
 							+ "other solutions could be to do some exercise, challenge negative thinking and "
 							+ "to eat a healthy diet.");
 				}
+			}
 		}
 	}
 
