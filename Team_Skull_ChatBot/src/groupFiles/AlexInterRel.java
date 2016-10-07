@@ -1,20 +1,19 @@
 package groupFiles;
-//Alex Huang
-import java.util.Scanner;
-
-import chatbot.JonathanMain;
-
 
 public class AlexInterRel implements Topic {
+	
 	private boolean inQuestionLoop ;
-	static Scanner input;
+	
 	static boolean whereLoop; 
 	static String response1;
 	static String response2;
+	static String response3;
 	private String problemResponse;
 	static boolean whoLoop;
+	static boolean appLoop;
 	static String who;
 	static String whoResponse;
+	
 
 	private int problemCount;
 	
@@ -26,7 +25,7 @@ public class AlexInterRel implements Topic {
 	public AlexInterRel(){
 		problemCount = 0;
 	}
-	
+	//a
 	public void talk()
 	{
 		inQuestionLoop = true;
@@ -38,13 +37,8 @@ public class AlexInterRel implements Topic {
 				JonathanMain.talkForever();
 			}
 			
-			talkProblem();
-			//if(printResponse.indexOf("stop")>=0){
-		//		inSchoolLoop =false;
-		//	problemResponse = JonathanMain.getInput();
-		//	if(!isTriggered(problemResponse)){
-			//	inQuestionLoop = false;
-				
+			printResponse();
+			
 			
 		}
 	}
@@ -60,26 +54,55 @@ public class AlexInterRel implements Topic {
 	        	while(whoLoop){
 	        		System.out.println("Has "+who+" hurt you physically?" );
 	        		response2 = JonathanMain.getInput();
+	        		
 	        		if(JonathanMain.findKeyword(response2, "yes", 0)>=0){
 	        			JonathanMain.print("Don't worry, I will call the police for you.");
+	        			whoLoop = false;
+	        			JonathanMain.talkForever();
 	        		}
 	        		if(JonathanMain.findKeyword(response2, "no", 0)>=0){
-	        			JonathanMain.print("Do you want me to talk to both of youy to solve your problem?");
-	        		}
-	        		
-	        			else{
-	        			JonathanMain.print("It's a yes or a no question.");
-	        		}
+	        			JonathanMain.print("I will talk to you both to solve your problem.");
+	        			whoLoop = false;
+	        			emotionalProblem();
 	        			
+	        		}
+	        		else{
+	        			JonathanMain.print("It's a yes or a no question.");
+	        	//		response3 = JonathanMain.getInput();
+	        			
+	        			
+	        			
+	        			}
 	        		
 	        	}
+	       }
+	        public static void emotionalProblem(){
 	        	
-	        	
-			
-			
-		
-			
-	}
+    				JonathanMain.print("What time do you want your appointment to be 12 or 3 in the afternoon?");
+    				response3 = JonathanMain.getInput();
+    			
+    				appLoop = true;
+    	        	while(appLoop){
+    				if(JonathanMain.findKeyword(response3,"3",0)>=0){
+    					JonathanMain.print("See you and at 3 pm.");
+    					appLoop =false;
+    					JonathanMain.talkForever();
+    				}
+    				if(JonathanMain.findKeyword(response3,"12",0)>=0){
+    					JonathanMain.print("See you and at 12 pm.");
+    					appLoop = false;
+    					JonathanMain.talkForever();
+    				}
+    				else
+    				{
+    					JonathanMain.print("Pick a given time.");
+    					
+    				}
+    				
+    	        	}
+    			}
+	        
+	        
 	        
 	        private void printResponse() {
 		int responseChoice = 0;
@@ -91,19 +114,12 @@ public class AlexInterRel implements Topic {
 			responseChoice = (int)(Math.random()*responses.length);
 			JonathanMain.print(responses[responseChoice]);
 		}
+		talkProblem();
 	}
 
 public boolean isTriggered(String userInput) {
 	
-	if(JonathanMain.findKeyword(userInput, "family", 0) >=0 ){
-		return true;
-	}
-	if(JonathanMain.findKeyword(userInput, "friends", 0) >=0 ){
-		return true;
-	}
-	if(JonathanMain.findKeyword(userInput, "relationship", 0) >=0 ){
-		return true;
-	}
+
 	if(JonathanMain.findKeyword(userInput, "inter-relationships", 0) >=0 ){
 		return true;
 	}
