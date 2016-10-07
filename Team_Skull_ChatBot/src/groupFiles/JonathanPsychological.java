@@ -12,14 +12,14 @@ public class JonathanPsychological implements Topic {
 		inQuestionLoop = true;
 		while(inQuestionLoop){
 			questionResponse = JonathanMain.getInput();
-			String[] nothing = {"no","none","nothing"};
+			problemIdentifier();
+			String[] nothing = {"no","none","nothing","bye","goodbye"};
 			for(int i = 0; i < nothing.length; i++){
 				if(JonathanMain.findKeyword(questionResponse, nothing[i], 0) >= 0){
 					JonathanMain.print("Hopefully we have given you tips on how to solve your problem.");
 					inQuestionLoop = false;
 					JonathanMain.talkForever();
 				}
-				problemIdentifier();
 			}
 		}
 	}
@@ -31,20 +31,20 @@ public class JonathanPsychological implements Topic {
 		if(JonathanMain.findKeyword(questionResponse, "anxiety", 0) >= 0){
 			anxietyProblems();
 		}
-		else if(JonathanMain.findKeyword(questionResponse, "anxiety", 0) >= 0){
+		else if(JonathanMain.findKeyword(questionResponse, "schizophrenia", 0) >= 0){
 			schizophreniaProblems();
 		}	
 	}
 
 	private void schizophreniaProblems() {
-		if(JonathanMain.findKeyword(questionResponse, "schizophrenia", 0) >= 0){
 			JonathanMain.print("There aren't any self treatments for this disorder, but "
 					+ "there are medical ones. These medications are Antipsychotic and Anti-Tremor.");
-		}
+			if(JonathanMain.findKeyword(questionResponse, "stop", 0) >= 0){
+				JonathanMain.talkForever();
+			}
 	}
 
 	private void anxietyProblems() {
-		if(JonathanMain.findKeyword(questionResponse, "anxiety", 0) >= 0){
 			JonathanMain.print("Everyone in the world has experienced anxiety at least one time in their life."
 					+ " With this detail being true, people have found many ways to treat this disorder.");
 			JonathanMain.print("Some ways to treat this disorder is a healthy diet, meditation, reducing "
@@ -53,22 +53,23 @@ public class JonathanPsychological implements Topic {
 				JonathanMain.print("There is also the option of taking medication or going to therapy sessions."
 						+ " Some types of medications that can be taken are Sedatives, Antidepressents, and Anxiolytic");
 			}
-			else if(JonathanMain.findKeyword(questionResponse, "will try", 0) >= 0){
+			else if(JonathanMain.findKeyword(questionResponse, "try", 0) >= 0){
 				JonathanMain.print("Hopefully these solutions can help you overcome your anxiety.");
 			}
-		}
+			if(JonathanMain.findKeyword(questionResponse, "stop", 0) >= 0){
+				JonathanMain.talkForever();
+			}
 	}
 
 	private void depressionProblems() {
-		if(JonathanMain.findKeyword(questionResponse, "depression", 0) >= 0){
 			JonathanMain.print("Many people have depression in the modern world. Ever "
 					+ "since people have started getting out of depression, there "
 					+ "are many ways to deal with depression.");
 			JonathanMain.print("The main way to solve depression is to talk about it with other people.");
-			String[] tries = {"tried","will try"};
+			String[] tries = {"tried","try"};
 			for(int i = 0; i < tries.length; i++){
 				if(JonathanMain.findKeyword(questionResponse, tries[i], 0) >= 0){
-					if(JonathanMain.findKeyword(questionResponse, "will try", 0) >= 0){
+					if(JonathanMain.findKeyword(questionResponse, tries[1], 0) >= 0){
 						JonathanMain.print("Okay. Hopefully that will help you get out of your depression.");
 					}
 					JonathanMain.print("There are many other solutions that can help solve depression. Some "
@@ -76,7 +77,9 @@ public class JonathanPsychological implements Topic {
 							+ "to eat a healthy diet.");
 				}
 			}
-		}
+			if(JonathanMain.findKeyword(questionResponse, "stop", 0) >= 0){
+				JonathanMain.talkForever();
+			}
 	}
 
 	public boolean isTriggered(String userInput) {
